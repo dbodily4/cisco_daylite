@@ -1,0 +1,66 @@
+<html>
+<head>
+<script type="text/javascript">
+function OnTelephonyConversationStateChanged(json) {
+	try {
+		var conversation = JSON.parse(json);
+		if (conversation.state == "Started" && conversation.acceptanceState == "Pending" && conversation.remoteParticipants[0].voiceMediaState == "Pending"){
+			search_number = conversation.remoteParticipants[0].voiceMediaNumber;
+			url = 'daylite4://fone-connector/incoming?number=' + search_number
+			window.open(url);
+			// msg0 = "Open Daylite for the number: " + ;
+			// msg1 = 'URL is: ' + url;
+			// msg2 = '<a target="_blank" href="' + url + '">Click here to open</a>'
+			//
+			// msg = msg0 + '<br>' + msg1 + '<br>' + msg2;
+
+
+			// document.getElementById('callNumber').innerHTML = search_number
+		}
+	}
+	catch(e) {
+		document.getElementById('search_details').innerHTML = "cannot parse conversation:" + e.message;
+	}
+}
+
+</script>
+
+<script>
+window.onload = function LoadJS() {
+	document.getElementById('status').innerHTML = "Javascript works"
+};
+
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+  	<h1 class="text-center">Daylite Cisco Integration</h1>
+  	<p class="text-center">This tab is needed for the communication between Daylite and Cisco Jabber</p>
+	</div>
+	<div class="container">
+		<div class="text-center">Status:
+			<div id="status">not working
+			</div>
+		</div>
+	</div>
+	<!-- <div id="callContainer" class="fixed-center" style="margin-top:20px">
+		<div class="text-center">Incoming call
+			<div id="callNumber" class="font-weight-bold">123456
+			</div>
+		</div>
+	</div> -->
+	<div class="fixed-bottom">
+		<p class="text-center">Requirements</p>
+		<p class="text-center">Please make sure you have PluginCenter and Fone&Text installed</p>
+		<div class="text-center">
+			<a style="padding-right:8px" href="https://iosxpert.biz/download-plugincenter" title=""><img style="height:128px" src="https://iosxpert.biz/wp-content/uploads/pc-18-tn-.png" class="img-responsive"></a>
+			<a class="ml-8" href="https://support.iosxpert.biz/hc/en-us/articles/360001345652" title=""><img src="https://iosxpert.biz/wp-content/uploads/2015/11/Fone-and-Text-128x128.png" class="img-responsive"></a>
+		</div>
+		<p class="text-center"></p>
+	</div>
+</body>
+</html>
